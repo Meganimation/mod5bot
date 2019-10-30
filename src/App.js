@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import {connect} from 'react-redux';
 import {sendMessage} from './chat';
-import {recieveMessage} from './chat';
+import Facebook from './components/Facebook';
 
 
 
@@ -19,13 +19,14 @@ class App extends React.Component {
   return (
     <div className="App">
       <header className="App-header">
-   
+
+      <Facebook />
 
 
 
 
         <ul>
-         Hello Bot!
+       
          { feed.map( message => {
            if (message.sender === "user") {
           //  return <div>{message.text}</div> }
@@ -43,6 +44,8 @@ class App extends React.Component {
         }})}
 
         {feed.sender}
+
+   
 
         
 
