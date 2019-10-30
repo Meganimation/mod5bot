@@ -3,17 +3,30 @@ import FacebookLogin from 'react-facebook-login';
 
 export default class Facebook extends Component {
     state = {
+        users: [],
+
         isLoggedIn: false,
         userID: '',
         name: '',
         email: '',
         picture: ''
+
+    }
+
+
+    componentDidMount() {
+        fetch('http://localhost:3000/senders')
+        .then( res => res.json())
+        .then( data => this.setState({ users: data}))
     }
 
 
     responseFacebook = response => {
        
-    
+    console.log(response) // save to backend?
+
+
+
 
     this.setState({
         isLoggedIn: true,
@@ -22,8 +35,45 @@ export default class Facebook extends Component {
         email: response.email, 
         picture: response.picture.data.url
     })
+
+
+
+    // this.state.users.map((user) => {
+    //     if (user.facebook_id === parseInt(response.userID))     {
+ 
+    //    console.log(`welcome back ${user.facebook_id}`)   }
+    
+    //    if (user.facebook_id !== parseInt(response.userID)) {
+    //     console.log('text')
+    //      return saveUser()  } })
+ 
+        fetch('http://localhost:3000/senders', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              name: response.name,
+              email: response.email,
+              facebook_id: response.userID,
+       
+            })
+          })
+          .then(alert('done'))       
     }
 
+
+
+
+
+
+
+
+
+
+
+        
     render() {
         let fbContent;
 
@@ -37,7 +87,7 @@ export default class Facebook extends Component {
                 <h2>
                     Welcome {this.state.name}    </h2>
 
-Email: {this.state.email}            
+                    Email: {this.state.email}            
             
 
                 </div>;
@@ -52,9 +102,11 @@ Email: {this.state.email}
         }
 
 
+
         return (
             <div>
                 {fbContent}
+            
             </div>
         )
     }
