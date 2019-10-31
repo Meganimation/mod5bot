@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
+import { Link } from 'react-router-dom';
+import BotChatContainer from './BotChatContainer';
+
 
 export default class Facebook extends Component {
     state = {
         users: [],
 
+   
         isLoggedIn: false,
         userID: '',
         name: '',
         email: '',
         picture: ''
+        
 
     }
 
@@ -67,46 +72,58 @@ export default class Facebook extends Component {
 
 
 
-
-
-
-
-
-
         
     render() {
         let fbContent;
 
         if(this.state.isLoggedIn) {
-            fbContent = <div style={{
-                width: '400px',
+            fbContent =  <div style={{
+                height: '900px',
+                width: '900px',
                 margin: 'auto',
                 padding: '20px'
             }}>
-                <img src={this.state.picture} alt={this.state.name} />
+               
                 <h2>
-                    Welcome {this.state.name}    </h2>
+                 {this.state.name}   <img src={this.state.picture} alt={this.state.name} />  </h2>     
+<br/>
+<br/>
+<br/>
+<br/>
 
-                    Email: {this.state.email}            
+                 <BotChatContainer name={this.state.name} />      
             
 
                 </div>;
 
         } else {
-            fbContent = ( <FacebookLogin
+            fbContent = ( 
+            <>
+            <FacebookLogin
             appId="1378656285636593"
             autoLoad={true}
             fields="name,email,picture"
             onClick={this.componentClicked}
-            callback={this.responseFacebook} /> );
+            callback={this.responseFacebook} /> 
+
+            <br/>
+            
+             <Link exact to="/home"><button className="myButton">login as guest</button></Link>
+             </>
+            );
+
+
+
+
+
         }
 
 
 
         return (
             <div>
-                {fbContent}
-            
+          {fbContent}
+        
             </div>
         )
     }
