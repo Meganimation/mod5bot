@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {sendMessage} from '../chat';
+import HeaderBar from './HeaderBar'
+import Typing from 'react-typing-animation';
 
 
  class BotChatContainer extends Component {
@@ -12,7 +14,13 @@ sayHello=()=>{
     if(this.props.name === undefined)
     return 'Welcome, guest!'
     else   
-    return `Hello ${this.props.name}`
+    return <div className='fade-in'> Hello {this.props.name}  <br/>
+    <small> type stuff in below or else</small>
+    
+    
+    </div>
+ 
+
  }
 
     render() {
@@ -20,12 +28,13 @@ sayHello=()=>{
         const {feed, sendMessage, recieveMessage} = this.props
 
         return (
-
-         
             <div>
+            <HeaderBar name={this.props.name} email={this.props.email} facebook_id={this.props.userID}   picture={this.props.picture} />
+         
+         
                    <h1 style={{
                 height: '100px',
-                width: '900px',
+              
          
                 padding: '20px'}}> {this.sayHello()}</h1>
                   <ul>
@@ -39,12 +48,20 @@ sayHello=()=>{
         }
 
         </ul>
-        <input type="text" onChange={this.sayHello()} onKeyDown={(e) => e.keyCode === 13 ? sendMessage(e.target.value) : null} />
+        <input className="fade-in" type="text" onChange={this.sayHello()} onKeyDown={(e) =>  e.keyCode === 13 ? sendMessage(e.target.value) : null} />
 
           { feed.map( message => {
           if (message.sender === "bot") {
+         
+          return <div className="fade-out">
 
-          return <div>{message.text}</div>
+            <Typing speed = {38}>
+
+            {message.text}
+            
+              </Typing >
+              </div>
+        
                 //post this as messages reciever:bot, content: message.text
           }
           }) }
