@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 
 export default class HeaderBar extends Component {
 
@@ -73,7 +74,7 @@ export default class HeaderBar extends Component {
 
 <div id="mySidebar" className="sidebar">
   <a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>&times;</a>
-  <a href="#"> <img className="icon" src={this.props.picture} alt={this.props.name} />   <br></br>  {this.props.name}
+  <a href="#">   <br></br>  {this.props.name}
  </a>
  <br/>
  <br/>
@@ -83,13 +84,19 @@ export default class HeaderBar extends Component {
  <br/>
  <br/>
 
-  <a href="#">Services</a>
+
+
+
+  <Link 
+        to={{ pathname: '/chatlog', 
+        state: { sender: this.props.id} }}> Chatlog </Link> 
   <br/>
   <br/>
-  <a href="#">Clients</a>
+  <Link 
+        to={{ pathname: '/settings' }}> Settings </Link>
   <br/>
   <br/>
-  <a href="#">Contact</a>
+  <Link exact to="/projects">  Projects </Link>
   <br/>
   <br/>
 </div>

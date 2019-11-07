@@ -3,6 +3,7 @@ import FacebookLogin from 'react-facebook-login';
 import { Link } from 'react-router-dom';
 import BotChatContainer from './BotChatContainer';
 import HeaderBar from './HeaderBar';
+import ls from 'local-storage';
 
 
 export default class Facebook extends Component {
@@ -14,7 +15,8 @@ export default class Facebook extends Component {
         userID: '',
         name: '',
         email: '',
-        picture: ''
+        picture: '',
+        id: 0
         
 
     }
@@ -24,14 +26,13 @@ export default class Facebook extends Component {
         fetch('http://localhost:3000/senders')
         .then( res => res.json())
         .then( data => this.setState({ users: data}))
+
     }
 
 
     responseFacebook = response => {
-       
+   
     console.log(response) // save to backend?
-
-
 
 
     this.setState({
@@ -42,16 +43,30 @@ export default class Facebook extends Component {
         picture: response.picture.data.url
     })
 
+    ls.set('userID', response.userID);
 
+    ls.set('name', response.name);
 
-    // this.state.users.map((user) => {
-    //     if (user.facebook_id === parseInt(response.userID))     {
+    ls.set('email', response.email);
+
+    ls.set('picture', response.picture.data.url);
+
  
-    //    console.log(`welcome back ${user.facebook_id}`)   }
+// Need to save this to localstorage or global state
+
+    const matchId=()=> {
+        this.state.users.map((user) => {
+            if (user.facebook_id === parseInt(response.userID))     {
+                this.setState({
+                    id: user.id
+                })
+                ls.set('id', user.id);
+     
+           console.log(`welcome back ${user.id}`)   }
+        })
+    }
     
-    //    if (user.facebook_id !== parseInt(response.userID)) {
-    //     console.log('text')
-    //      return saveUser()  } })
+
  
         fetch('http://localhost:3000/senders', {
             method: 'POST',
@@ -63,10 +78,11 @@ export default class Facebook extends Component {
               name: response.name,
               email: response.email,
               facebook_id: response.userID,
+              picture: response.picture.data.url
        
             })
           })
-          .then(alert('done'))       
+          .then(matchId)
     }
 
 
@@ -75,12 +91,17 @@ export default class Facebook extends Component {
 
         
     render() {
-        let fbContent;
 
+
+
+        let fbContent;
+     
         if(this.state.isLoggedIn) {
+   
+        
             fbContent = 
             <div> 
-            <BotChatContainer name={this.state.name} email={this.state.email} facebook_id={this.state.userID}   picture={this.state.picture}  />      
+            <BotChatContainer id={window.localStorage.id} name={window.localStorage.name} email={this.state.email} facebook_id={this.state.userID}   picture={window.localStorage.picture}  />      
             
 
             </div>;
@@ -89,10 +110,7 @@ export default class Facebook extends Component {
             fbContent = ( 
             <div >
                 
-                
-                <br/>
-            <br/>
-            <br/>
+
             <br/><br/>
             <br/><br/>
             <br/><br/>
@@ -100,10 +118,7 @@ export default class Facebook extends Component {
             <br/><br/>
             <br/><br/>
             <br/><br/>
-            <br/>
-         
-            <br/>
-            <br/>
+            
             <FacebookLogin
             appId="1378656285636593"
             autoLoad={true}
@@ -115,16 +130,13 @@ export default class Facebook extends Component {
             <br/>
             <br/>
             <br/>
-          
             
              <Link exact to="/home"><button className="myButton">login as guest</button></Link>
              <br/>
             <br/>
             <br/>
 
-      
-
-             </div>
+            </div>
             );
 
 

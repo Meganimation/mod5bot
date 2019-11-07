@@ -1,6 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import ChatLog from './components/ChatLog'
+import Success from './components/Success'
+import Projects from './components/Projects'
+import Settings from './components/Settings'
+
 
 
 import './App.css';
@@ -20,6 +25,10 @@ class App extends React.Component {
     <Switch>
     <Route exact path="/" component={Facebook} />
     <Route exact path="/home" component={BotChatContainer} />
+    <Route exact path="/chatlog" component={ChatLog} />
+    <Route exact path="/success" component={Success} />
+    <Route exact path="/projects" component={Projects} />
+    <Route exact path="/settings" component={Settings} />
     </Switch>
  
                 

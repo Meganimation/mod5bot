@@ -49,7 +49,7 @@ client.textRequest(text)
     }
 };
 
-const initState = [{text: 'ayy'}];
+const initState = [{text: ''}];
 
 const messageReducer = (state = initState, action) => {
     switch(action.type) {
@@ -64,7 +64,3 @@ const messageReducer = (state = initState, action) => {
 };
 
 export const store = createStore(messageReducer, applyMiddleware(messageMiddleware))
-
-
-
-
