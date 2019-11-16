@@ -5,7 +5,7 @@ import ChatLog from './components/ChatLog'
 import Success from './components/Success'
 import Projects from './components/Projects'
 import Settings from './components/Settings'
-
+import Particles from 'react-particles-js';
 
 
 import './App.css';
@@ -21,6 +21,7 @@ class App extends React.Component {
   return (
       <div className="App">
       <header className="App-header">
+        
       <BrowserRouter> 
     <Switch>
     <Route exact path="/" component={Facebook} />
@@ -29,12 +30,14 @@ class App extends React.Component {
     <Route exact path="/success" component={Success} />
     <Route exact path="/projects" component={Projects} />
     <Route exact path="/settings" component={Settings} />
+    
     </Switch>
  
                 
                 </BrowserRouter>
 
     </header>
+    
     </div>
   )
   }

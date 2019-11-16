@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import ls from 'local-storage';
+import HeaderBar from './HeaderBar';
 
 export default class Settings extends Component {
 
@@ -95,27 +96,52 @@ updateEmail=()=>{
     render() {
         return (
             <div>
-                <h1> This is the Settings page </h1>
-
-<br/>  Name:   {window.localStorage.name}    <button onClick ={this.updateName}>change</button> <br/>
-<br/>  email:   {window.localStorage.email}     <button onClick ={this.updateEmail}>change</button> <br/>
+                
+                <HeaderBar/>
+                <div className ="fade-in">
+               
+                <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+  
+      
+        
+                <div className="myMainBoxx">
+           
+    
+                <img src="https://img.icons8.com/cotton/2x/settings--v1.png" />
+                <h2>  settings </h2>   
+                <br/>
 <br/>
 <br/>
-
-<button onClick={this.logout}> log out </button>
+<br/>      
+<br/>  <h3>name:   {window.localStorage.name} </h3> <br/>
+  <button className="myOtherHomeButton" onClick ={this.updateName}>change</button> <br/>
+<br/>  <h3> email:   {window.localStorage.email}   </h3> <br/> 
+ <button className="myOtherHomeButton"  onClick ={this.updateEmail}>change</button> <br/>
 <br/>
 <br/>
 <br/>
 <br/>
 <br/>
 <br/>
-
-
+<button className="myOtherHomeButton" onClick={this.logout}> log out </button>
+<br/>
+<br/>
 
 
     <Link exact to="/home"> 
     <button  className="myOtherHomeButton">go home </button>
     </Link>
+            </div>
+            </div><div></div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             </div>
         )
     }

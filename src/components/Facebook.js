@@ -9,16 +9,12 @@ import ls from 'local-storage';
 export default class Facebook extends Component {
     state = {
         users: [],
-
-   
         isLoggedIn: false,
         userID: '',
         name: '',
         email: '',
         picture: '',
         id: 0
-        
-
     }
 
 
@@ -32,15 +28,14 @@ export default class Facebook extends Component {
 
     responseFacebook = response => {
    
-    console.log(response) // save to backend?
+
 
 
     this.setState({
         isLoggedIn: true,
         userID: response.userID,
         name: response.name,
-        email: response.email, 
-        picture: response.picture.data.url
+        email: response.email
     })
 
     ls.set('userID', response.userID);
@@ -49,10 +44,8 @@ export default class Facebook extends Component {
 
     ls.set('email', response.email);
 
-    ls.set('picture', response.picture.data.url);
 
  
-// Need to save this to localstorage or global state
 
     const matchId=()=> {
         this.state.users.map((user) => {
@@ -77,8 +70,7 @@ export default class Facebook extends Component {
             body: JSON.stringify({
               name: response.name,
               email: response.email,
-              facebook_id: response.userID,
-              picture: response.picture.data.url
+              facebook_id: response.userID
        
             })
           })
@@ -101,23 +93,18 @@ export default class Facebook extends Component {
         
             fbContent = 
             <div> 
-            <BotChatContainer id={window.localStorage.id} name={window.localStorage.name} email={this.state.email} facebook_id={this.state.userID}   picture={window.localStorage.picture}  />      
+            <BotChatContainer id={window.localStorage.id} name={window.localStorage.name} email={this.state.email} facebook_id={this.state.userID}     />      
             
 
             </div>;
 
         } else {
             fbContent = ( 
-            <div >
+            <div className = "myMainBox" >
                 
 
             <br/><br/>
-            <br/><br/>
-            <br/><br/>
-            <br/><br/>
-            <br/><br/>
-            <br/><br/>
-            <br/><br/>
+        
             
             <FacebookLogin
             appId="1378656285636593"
@@ -129,12 +116,11 @@ export default class Facebook extends Component {
 
             <br/>
             <br/>
-            <br/>
-            
-             <Link exact to="/home"><button className="myButton">login as guest</button></Link>
+        
+             <Link exact to="/home"><button className="myOtherHomeButton">login as guest</button></Link>
              <br/>
             <br/>
-            <br/>
+          
 
             </div>
             );

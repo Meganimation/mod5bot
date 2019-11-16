@@ -34,13 +34,15 @@ export default class Success extends Component {
       
     render() {
         return (
-            <div>
-                Your chat has been saved! 
+          <div className="mySuccessBox">
+                <h2>your chat has been saved! </h2>
                 <br/>
+              
                 
                 <Link 
         to={{ pathname: '/chatlog', 
-        state: { sender: this.props.id} }}> Chatlog </Link> 
+        state: { sender: this.props.id} }}> <button className="myOtherHomeButton">chatlog</button> </Link> 
+        <br/>
 
                 <br/>
                 <Link exact to="/home"> 

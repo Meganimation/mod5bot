@@ -40,9 +40,9 @@ export default class HeaderBar extends Component {
                 margin: 'auto',
                 padding: '20px'
             }}>
-           
-              <a href="#" className="openButton" onClick={this.openNav}>&#9776;codecanyon</a>
      
+          
+              <li><a href="#" class="round green" onClick={this.openNav}>≣<span class="round"></span></a></li>
 
 <div id="main">
 
@@ -50,7 +50,7 @@ export default class HeaderBar extends Component {
 
 </div>
                     
-                
+{/*                 
                  <nav>
   <ul>
     <li>
@@ -68,7 +68,7 @@ export default class HeaderBar extends Component {
       <a href="#"></a>
     </li>
   </ul>
-</nav>   
+</nav>    */}
 
 
 

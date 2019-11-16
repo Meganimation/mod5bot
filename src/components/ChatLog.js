@@ -24,13 +24,6 @@ state={
     }
 
 
-    // componentDidMount(){
-    //     fetch(`http://localhost:3000/senders`)
-    //     .then( res => res.json())
-    //     .then( data => this.setState({ sender: data}))
-    // }
-
-
     deleteMsg=(event)=>{
         var answer = window.confirm('are you sure?')
         if (answer) {
@@ -66,17 +59,39 @@ state={
                 }
             )}}
 
+         
+
 
     allMessages=()=>{
+
+        if (this.state.displayedMessages.length < 1) {
+            return ('There are no messages here!')
+        }
         if (window.localStorage.id === undefined) {
             return ('You must log in to view chat logs!'  )
             }
-        if (window.localStorage.id !== undefined)  {
+        if (window.localStorage.id !== undefined  && this.state.displayedMessages.length > 1)  {
                 return this.state.displayedMessages.map((message) => {     
                 return <Chats key={message.id} deleteMsg={this.deleteMsg} message={message} deletedMessages={this.state.deletedMessages} userID={window.localStorage.id}/>}
             )}}
 
+
+
+            sortThings = (event) => {
+     
+
          
+                if (event.target.innerText ==  "Sort By: Oldest") {
+                    this.setState({displayThings : this.state.displayedMessages.sort((thingA, thingB) => thingA.created_by > thingB.created_by ? 1 : -1)})
+                    
+               return event.target.innerText = "Sort By: Newest"
+                }
+                if (event.target.innerText ==  "Sort By: Newest") {
+                    this.setState({displayThings : this.state.displayedMessages.sort((thingA, thingB) => thingA.created_by < thingB.created_by ? 1 : -1)})
+                 return   event.target.innerText = "Sort By: Oldest"
+                }
+
+            }
         
                 
 
@@ -102,17 +117,23 @@ state={
 
 
 
-<h2> Your Chatlog </h2>
 
-<div className='myBox'>
+
+<div >
 
     <br/>
     <Link exact to="/home" > 
     <button onClick={this.deleteDivs} className="myOtherHomeButton"> Home </button>
     </Link>
-    <br/>
 
-                <button onClick={this.deleteAll}> Delete Convo </button>
+
+                <button className='myOtherHomeButton' onClick={this.deleteAll}> Delete Convo </button>
+  
+         
+                
+                <button className='myOtherHomeButton' onClick={this.sortThings}> Sort By: Oldest </button>
+                <br/>
+                <br/>
                 <br/>
                 <br/>
                 {this.allMessages()}
