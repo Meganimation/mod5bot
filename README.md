@@ -28,9 +28,7 @@ Back-end can be found<a href='https://github.com/Meganimation/Ill-um....Ina-TEA'
 <h3> Backend </h3>
 </br>
 Ruby, Rails, Python, PostGres
-<h3> Machine Learning / AI </h3>
-</br> 
-DialogFlow, Redux
+</br>
 <h3> Misc. </h3>
 Bridge CC, Cintiq Bamboo 2, Animate CC, Photoshop CS5, Illustrator CC,
 </br> 
