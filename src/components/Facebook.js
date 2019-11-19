@@ -22,6 +22,7 @@ export default class Facebook extends Component {
         fetch('http://localhost:3000/senders')
         .then( res => res.json())
         .then( data => this.setState({ users: data}))
+        .then( ls.set('botSpeech', 'Hi!'))
 
     }
 
@@ -43,6 +44,8 @@ export default class Facebook extends Component {
     ls.set('name', response.name);
 
     ls.set('email', response.email);
+
+
 
 
  
