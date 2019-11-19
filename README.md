@@ -13,6 +13,11 @@ Back-end can be found<a href='https://github.com/Meganimation/Ill-um....Ina-TEA'
 </br>
 <ul> Fork <a href='https://github.com/Meganimation/Ill-um....Ina-TEA'>this</a> repo. </ul>
 </br>
-<ul> Open both in seperate terminals </ul>
+<ul> Open both repos in seperate terminals </ul>
 </br>
 <ul> For the front-end, enter in the terminal 'npm i && npm start' </ul>
+</br>
+<ul> For the back-end, enter in the terminal 'bundle i && rails s' </ul>
+</br>
+</br>
+<i> For any issues, queries, or feedback, please email MeganOliviaWendyAdams@gmail.com </i>

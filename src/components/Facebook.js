@@ -22,8 +22,15 @@ export default class Facebook extends Component {
         fetch('http://localhost:3000/senders')
         .then( res => res.json())
         .then( data => this.setState({ users: data}))
-        .then( ls.set('botSpeech', 'Hi!'))
+        .then( this.setOnce() ) 
 
+    }
+
+    setOnce=()=>{
+        if (this.state.users.length < 1) {
+            ls.set('botSpeech', 'Hi!')
+        }
+        else console.log('its set!')
     }
 
 
